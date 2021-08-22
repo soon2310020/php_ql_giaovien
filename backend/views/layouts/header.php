@@ -40,9 +40,7 @@ if (isset($_SESSION['user'])) {
                             <img src="assets/uploads/<?php echo $avatar; ?>" class="img-circle" alt="User Image">
 
                             <p>
-                                <?php echo $username . ' - ' . $jobs; ?>
-                                <!--Nguyễn Viết Mạnh - Web Developer-->
-                                <small>Thành viên từ năm <?php echo $year; ?></small>
+
                             </p>
                         </li>
                         <!-- Menu Footer-->
@@ -108,20 +106,7 @@ if (isset($_SESSION['user'])) {
     <!-- /.sidebar -->
 </aside>
 
-<!-- Breadcrumd Wrapper. Contains breadcrumb -->
-<div class="breadcrumb-wrap content-wrap content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-        <h1>
-            Dashboard
-            <small>Control panel</small>
-        </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Dashboard</li>
-        </ol>
-    </section>
-</div>
+
 
 <!-- Messaeg Wrapper. Contains messaege error and success -->
 <div class="message-wrap content-wrap content-wrapper">
