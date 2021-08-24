@@ -13,7 +13,7 @@ app.controller('packageController', ['$scope', '$http', '$timeout', '$q', functi
     $scope.maBoMon="";
     $scope.tenCongVan="";
     $scope.maGiaoVien="";
-    $scope.itemAdd={maBoMon:'',tenMon:'',sotiet:'',mota:''};
+    $scope.itemAdd={maBoMon:'',tenCongVan:'',maGiaoVien:'',noiDung:''};
 
     $http.get("index.php?controller=Congvan&action=getAll",{params: {numberPerPage:$scope.numberPerPage,pageNumber:$scope.pageNumber,
             maBoMon:$scope.maBoMon,tenCongVan:$scope.tenCongVan,maGiaoVien:$scope.maGiaoVien}})
@@ -90,11 +90,8 @@ app.controller('packageController', ['$scope', '$http', '$timeout', '$q', functi
 
     }
     $scope.clearForm=function () {
-        $scope.itemAdd.tenMon="";
-        $scope.itemAdd.maBoMon="";
-        $scope.itemAdd.sotiet="";
-        $scope.itemAdd.mota="";
-
+        $scope.itemAdd={maBoMon:'',tenCongVan:'',maGiaoVien:'',noiDung:''};
+        $('#file').val('');
     }
     $scope.check=function () {
         var file_data = $('#file').prop('files')[0];
@@ -136,64 +133,96 @@ app.controller('packageController', ['$scope', '$http', '$timeout', '$q', functi
     }
     $scope.checkEdit=function () {
 
-        if($scope.itemFix.maBoMon==""||$scope.itemFix.maBoMon==null)
+        var file_data = $('#fileFix').prop('files')[0];
+        $scope.fileDataFix="";
+        if (file_data!=null)
         {
 
-            toastr.error("Hãy chọn bộ môn");
-            return false
+            var dot = file_data.name.lastIndexOf(".");
+
+            var type = file_data.name.substring(dot+1,file_data.name.length);
+            var match = ["pdf", "doc", "docx",];
+            if (type.toLowerCase()!=match['0']&&type.toLowerCase()!=match['1']&&type.toLowerCase()!=match['2'])
+            {
+                toastr.error("hãy chọn file có có định dạng doc, docx hoặc pdf");
+                return false
+            }
+            $scope.fileDataFix=file_data;
         }
-        if($scope.itemFix.tenMon==""||$scope.itemFix.tenMon==null)
+
+        if(($scope.itemFix.maBoMon==""||$scope.itemFix.maBoMon==null)&&($scope.itemFix.maGiaoVien==""||$scope.itemFix.maGiaoVien==null))
         {
 
-            toastr.error("Hãy nhập tên môn");
+            toastr.error("Hãy chọn bộ môn hoặc giáo viên");
             return false
         }
-        if ($scope.itemFix.sotiet==""||regex.test($scope.itemFix.sotiet)==false)
+        if($scope.itemFix.tenCongVan==""||$scope.itemFix.tenCongVan==null)
         {
-            toastr.error("Số tiết là số nhỏ hơn 4 chữ số");
+
+            toastr.error("Hãy nhập tên công văn");
             return false
         }
-        if($scope.itemFix.moTa==""||$scope.itemFix.moTa==null)
+
+        if($scope.itemFix.noiDung==""||$scope.itemFix.noiDung==null)
         {
 
             toastr.error("Hãy nhập mô tả");
             return false
         }
+
         return true;
     }
     $scope.edit=function (item2) {
         $scope.itemTemp=item2;
-        $scope.itemFix=$scope.itemTemp;
-        $scope.itemFix.maBoMon=Number($scope.itemTemp.maBoMon);
+
+        $scope.itemFix={maBoMon:Number(item2.maBoMon),tenCongVan:item2.tenCongVan,maGiaoVien:Number(item2.maGiaoVien),noiDung:item2.noiDung,
+        status:Number(item2.status),file:item2.file};
     }
     $scope.clearFormFix= function()
     {
-        console.log($scope.itemTemp);
-        $scope.itemFix={maBoMon:'',tenMon:'',sotiet:'',mota:''};
+
+        $scope.itemFix={maBoMon:Number($scope.itemTemp.maBoMon),tenCongVan:$scope.itemTemp.tenCongVan,maGiaoVien:Number($scope.itemTemp.maGiaoVien),noiDung:$scope.itemTemp.noiDung,
+            status:Number($scope.itemTemp.status),file:$scope.itemTemp.file,maCongVan:$scope.itemTemp.maCongVan};
 
         $scope.search();
 
     }
-    $scope.fix=function () {
+    $scope.fix=function (itemFix) {
         let i = $scope.checkEdit();
-        console.log($scope.itemFix);
+        var form_data = new FormData();
+        if (  $scope.fileDataFix!="")
+        {
+            form_data.append('file', $scope.fileDataFix);
+        }
 
+        form_data.append('fileName',itemFix.file);
+        form_data.append('tenCongVan',itemFix.tenCongVan);
+        form_data.append('maBoMon',itemFix.maBoMon);
+        form_data.append('maGiaoVien',itemFix.maGiaoVien);
+        form_data.append('noiDung',itemFix.noiDung);
+        form_data.append('status',itemFix.status);
+        form_data.append('maCongVan',$scope.itemTemp.maCongVan);
         if (i) {
 
-            itemFix = JSON.parse(JSON.stringify($scope.itemFix));
-            $.post(
-                'index.php?controller=Mon&action=update', // URL
-                itemFix,  // Data
-                function (response) {
+            $.ajax({
+                url: 'index.php?controller=Congvan&action=update',
+                dataType: 'text',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: form_data,
+                type: 'post',
+                success:function (response) {
 
                     number = Number(response);
                     switch (number) {
                         case 1:
 
                             $("#fix").modal("hide");
-                            $scope.clearForm();
-                            toastr.success("Sửa môn học thành công");
+                            toastr.success("Sửa công văn thành công");
                             $scope.search();
+                            $scope.itemTemp="";
+                            $('#fileFix').val('');
                             break;
 
                         case 0:
@@ -203,9 +232,8 @@ app.controller('packageController', ['$scope', '$http', '$timeout', '$q', functi
                             break;
 
                     }
-                },
-                'text'
-            );
+                }
+            });
         }
     }
     $scope.delete=function (itemDelete) {

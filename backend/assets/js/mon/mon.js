@@ -153,7 +153,6 @@ app.controller('packageController', ['$scope', '$http', '$timeout', '$q', functi
     }
    $scope.fix=function () {
        let i = $scope.checkEdit();
-       console.log($scope.itemFix);
 
        if (i) {
 

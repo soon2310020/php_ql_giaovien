@@ -11,6 +11,7 @@ public $maBoMon;
 public $taoNgay;
 public $suaNgay;
 public $file;
+public $status;
 
     public $str_search = '';
     public function getAll($pageNumber,$numberPerPage,$maBoMon,$tenCongVan,$maGiaoVien)
@@ -83,15 +84,17 @@ public $file;
     public function update()
     {
         $obj_update = $this->connection
-            ->prepare("UPDATE mon SET maBoMon=:maBoMon,tenMon=:tenMon, moTa=:moTa, sotiet=:sotiet,suaNgay=:suaNgay
-                                where maMon=:maMon");
+            ->prepare("UPDATE congvan SET maBoMon=:maBoMon,tenCongVan=:tenCongVan,file=:file, maGiaoVien=:maGiaoVien,noiDung=:noiDung,status=:status,suaNgay=:suaNgay where maCongVan=:maCongVan");
+
         $arr_update = [
             ':maBoMon' => $this->maBoMon,
-            ':tenMon' => $this->tenMon,
-            ':moTa' => $this->moTa,
-            ':sotiet' => $this->soTiet,
-            'maMon'=>$this->maMon,
-            'suaNgay'=>$this->suaNgay
+            ':tenCongVan' => $this->tenCongVan,
+            ':file' => $this->file,
+            ':maGiaoVien'=>$this->maGiaoVien,
+            ':noiDung' =>$this->noiDung,
+            ':status'=>$this->status,
+            'suaNgay'=>$this->suaNgay,
+            ':maCongVan'=>$this->maCongVan
 
         ];
         return $obj_update->execute($arr_update);
@@ -99,14 +102,15 @@ public $file;
     public function insert()
     {
         $obj_insert = $this->connection
-            ->prepare("INSERT INTO congvan(maBoMon, tenCongVan, file, maGiaoVien,noiDung) 
-                                VALUES (:maBoMon, :tenCongVan, :file, :maGiaoVien,:noiDung)");
+            ->prepare("INSERT INTO congvan(maBoMon, tenCongVan, file, maGiaoVien,noiDung,status) 
+                                VALUES (:maBoMon, :tenCongVan, :file, :maGiaoVien,:noiDung,:status)");
         $arr_insert = [
             ':maBoMon' => $this->maBoMon,
             ':tenCongVan' => $this->tenCongVan,
             ':noiDung' => $this->noiDung,
             ':file' => $this->file,
-            ':maGiaoVien'=>$this->maGiaoVien
+            ':maGiaoVien'=>$this->maGiaoVien,
+            ':status'=>1
         ];
         return $obj_insert->execute($arr_insert);
     }
@@ -116,22 +120,6 @@ public $file;
             ->prepare("DELETE FROM mon WHERE maMon = $maMon");
         return $obj_delete->execute();
     }
-    public function getExel()
-    {
 
-
-        $obj_select = $this->connection
-            ->prepare("SELECT mon.*, bomon.tenBoMon AS tenBoMon FROM mon
-                        INNER JOIN bomon ON mon.maBoMon = bomon.maBoMon 
-                        ORDER BY mon.taoNgay DESC
-                        ");
-
-        $arr_select = [];
-        $obj_select->execute($arr_select);
-        $mon = $obj_select->fetchAll(PDO::FETCH_ASSOC);
-
-        return $mon;
-
-    }
 
 }

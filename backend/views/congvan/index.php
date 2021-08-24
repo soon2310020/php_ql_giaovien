@@ -73,8 +73,8 @@
             <section class="panel panel-default">
                 <header class="panel-heading">
                     <a href="javascript:void(0)">
-                        <h4 class="panel-title font-bold text-uppercase" data-toggle="collapse">
-                            DANH SÁCH MÔN HỌC
+                        <h4 class="panel-title font-bold text-uppercase " data-toggle="collapse">
+                            DANH SÁCH CÔNG VĂN
                         </h4>
                     </a>
                 </header>
@@ -85,7 +85,7 @@
                             <label style="color: red;">{{listData.rowCount}}</label>
                             <label class="input-sm">Hiển thị: 10 </label>
 
-                            <button type="button"  class="pull-right btn btn-s-sm btn-info" ng-click="exportExcel()"><i class="fa fa-file-excel-o" ></i> Xuất excel</button>
+
                         </div>
 
                         <div class="table bg-white">
@@ -111,7 +111,7 @@
                                             <button class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-cogs"></i></button>
                                             <ul class="dropdown-menu pull-left" style="width: fit-content;">
                                                 <li ><a href="javascript:void(0)" data-toggle="modal" ng-click="edit(item);" data-target="#fix"><font style="font-weight: bold;">
-                                                            <i class="fa fa-eye icon"></i> Sửa môn học
+                                                            <i class="fa fa-eye icon"></i> Chi tiết công văn
                                                         </font></a></li>
 
                                                 <li ><a href="javascript:void(0)" data-toggle="modal" data-target="#deletePackage" ng-click="delete(item);"><font style="font-weight: bold;">
@@ -157,16 +157,16 @@
     <div class="modal fade" id="deletePackage" tabindex="-1" role="dialog" aria-labelledby="deletePackage" aria-hidden="true" aria-label="Close">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header alert-info">
+                <div class="modal-header alert-info text-center" >
                     <button type="button" class="close" class="btn btn-default" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title">Xác nhận</h4>
                 </div>
                 <div>
-                    <div class="modal-body">
+                    <div class="modal-body text-center">
                         <label>Bạn có chắc chắn muốn xóa môn học này Không</label>
 
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer center-block">
                         <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="deleteYes()" style="text-transform: none;"><i class="fa fa-check"></i>Đống ý</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>Hủy bỏ</button>
                     </div>
@@ -180,7 +180,7 @@
     <div class="modal fade"  id="addPackageForm"  role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog" style="width: 60%">
             <div class="modal-content">
-                <div class="modal-header alert " style="padding: 7px; background: #277CBE;">
+                <div class="modal-header alert text-center " style="padding: 7px; background: #277CBE;">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="clearForm()">&times;</button>
                     <h5 class="modal-title" id="myModalLable" style="font-size: 14pt;color: White;">Thêm mới công văn</h5>
                 </div>
@@ -243,18 +243,18 @@
         </div>
     </div>
     <!--    <%--    end form add--%>-->
-    <!--    <%--    form--%>-->
-    <div class="modal fade"  id="addPackageForm"  role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+
+    <div class="modal fade"  id="fix"  role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog" style="width: 60%">
             <div class="modal-content">
-                <div class="modal-header alert " style="padding: 7px; background: #277CBE;">
+                <div class="modal-header alert text-center " style="padding: 7px; background: #277CBE;">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="clearForm()">&times;</button>
-                    <h5 class="modal-title" id="myModalLable" style="font-size: 14pt;color: White;">Thêm mới môn học</h5>
+                    <h5 class="modal-title" id="myModalLable" style="font-size: 14pt;color: White;">Chi tiết công văn</h5>
                 </div>
                 <div class="modal-body row"  style="padding: 10px;">
                     <div class="col-md-2">Bộ môn(<font color="red">*</font>)</div>
                     <div class="col-md-3">
-                        <select ng-model="itemAdd.maBoMon" class="form-control" >
+                        <select ng-model="itemFix.maBoMon" class="form-control" >
                             <option value=""  disabled style="display:none">--Lựa chọn--</option>
                             <option ng-repeat="item in listData.items2" ng-value="{{item.maBoMon}}">{{item.tenBoMon}}</option>
                         </select>
@@ -262,7 +262,7 @@
                     <div class="col-md-1"></div>
                     <div class="col-md-2">Tên công văn(<font color="red">*</font>)</div>
                     <div class="col-md-3">
-                        <input class="form-control" type="text" placeholder="Tên môn học..." ng-model="itemAdd.tenCongVan" maxlength="50" >
+                        <input class="form-control" type="text" placeholder="Tên công văn..." ng-model="itemFix.tenCongVan" maxlength="50" >
                     </div>
 
                 </div>
@@ -274,7 +274,7 @@
 
                     <div class="col-md-2">Giáo viên(<font color="red">*</font>)</div>
                     <div class="col-md-3">
-                        <select ng-model="itemAdd.maBoMon" class="form-control" >
+                        <select ng-model="itemFix.maGiaoVien" class="form-control" >
                             <option value=""  disabled style="display:none">--Lựa chọn--</option>
                             <option ng-repeat="item in listData.items3" ng-value="{{item.maGiaoVien}}">{{item.tenGiaoVien}}</option>
                         </select>
@@ -282,67 +282,45 @@
                     <div class="col-md-1"></div>
                     <div class="col-md-2">Mô tả(<font color="red">*</font>)</div>
                     <div class="col-md-3">
-                        <input class="form-control" type="text" placeholder="Mô tả..." ng-model="itemAdd.noiDung" maxlength="50" >
+                        <input class="form-control" type="text" placeholder="Mô tả..." ng-model="itemFix.noiDung" maxlength="50" >
                     </div>
 
                 </div>
-
-
-                <div style="text-align: center; padding-bottom: 30px; padding-top: 30px">
-                    <button class="btn btn-default" style="width: 100px" ng-click="clearForm()" >Làm mới</button>
-                    <button type="button" id="btnSave" class="btn btn-primary" style="width: 100px" ng-click="save(itemAdd)">Lưu</button>
-                    <button class="btn btn-danger" style="width: 100px" ng-click="clearForm()" data-dismiss="modal" >Quay lại</button>
-                </div>
-
-
-            </div>
-        </div>
-    </div>
-    <!--    <%--    end form add--%>-->
-    <div class="modal fade"  id="fix"  role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
-        <div class="modal-dialog" style="width: 60%">
-            <div class="modal-content">
-                <div class="modal-header alert " style="padding: 7px; background: #277CBE;">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="clearForm()">&times;</button>
-                    <h5 class="modal-title" id="myModalLable" style="font-size: 14pt;color: White;">Thông tin môn học</h5>
-                </div>
                 <div class="modal-body row"  style="padding: 10px;">
-                    <div class="col-md-2">Bộ môn(<font color="red">*</font>)</div>
+
+
+
+
+                    <div class="col-md-2">File công văn(<font color="red">*</font>)</div>
                     <div class="col-md-3">
-                        <select ng-model="itemFix.maBoMon" class="form-control" >
+                        <a  href="assets/uploads/{{itemFix.file}}" download>{{itemFix.file}}</a>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-2">Trạng thái(<font color="red">*</font>)</div>
+                    <div class="col-md-3">
+                        <select ng-model="itemFix.status" class="form-control" >
                             <option value=""  disabled style="display:none">--Lựa chọn--</option>
-                            <option ng-repeat="item in listData.items2" ng-value="{{item.maBoMon}}">{{item.tenBoMon}}</option>
+                            <option  ng-value="1">Hiển thị</option>
+                            <option  ng-value="1">Không hiển thị</option>
                         </select>
                     </div>
-                    <div class="col-md-1"></div>
-                    <div class="col-md-2">Tên môn học(<font color="red">*</font>)</div>
-                    <div class="col-md-3">
-                        <input class="form-control" type="text" placeholder="Tên môn học..." ng-model="itemFix.tenMon" maxlength="50" >
-                    </div>
 
                 </div>
-
-
-
                 <div class="modal-body row"  style="padding: 10px;">
 
 
-                    <div class="col-md-2">Số tiết(<font color="red">*</font>)</div>
-                    <div class="col-md-3">
-                        <input class="form-control" type="text" placeholder="Số tiết..." ng-model="itemFix.sotiet" maxlength="50" >
-                    </div>
-                    <div class="col-md-1"></div>
-                    <div class="col-md-2">Mô tả(<font color="red">*</font>)</div>
-                    <div class="col-md-3">
-                        <input class="form-control" type="text" placeholder="Mô tả..." ng-model="itemFix.moTa" maxlength="50" >
+
+
+                    <div class="col-md-2">File công văn mới(<font color="red">*</font>)</div>
+                    <div class="col-md-9">
+                        <input class="form-control" type="file" id="fileFix"  >
                     </div>
 
                 </div>
-
 
                 <div style="text-align: center; padding-bottom: 30px; padding-top: 30px">
                     <button class="btn btn-default" style="width: 100px" ng-click="clearFormFix()" >Làm mới</button>
-                    <button type="button" id="btnSave" class="btn btn-primary" style="width: 100px" ng-click="fix(itemAdd)">Lưu</button>
+                    <button type="button" id="btnSave" class="btn btn-primary" style="width: 100px" ng-click="fix(itemFix)">Lưu</button>
                     <button class="btn btn-danger" style="width: 100px" ng-click="clearFormFix()" data-dismiss="modal" >Quay lại</button>
                 </div>
 

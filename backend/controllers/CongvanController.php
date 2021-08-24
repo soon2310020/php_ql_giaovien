@@ -64,34 +64,51 @@ class CongvanController extends Controller
     }
     public function update()
     {
-        if (isset($_POST['maMon']))
-        {
-            $maMon=$_POST['maMon'];
-        }
-        if (isset($_POST['maBoMon']))
-            $maBoMon=$_POST['maBoMon'];
-        if (isset($_POST['tenMon']))
-            $tenMon=$_POST['tenMon'];
-        if (isset($_POST['sotiet']))
-            $sotiet=$_POST['sotiet'];
-        if (isset($_POST['moTa']))
-            $moTa=$_POST['moTa'];
-        $mon =new Mon();
-        $mon->soTiet=$sotiet;
-        $mon->moTa=$moTa;
-        $mon->tenMon=$tenMon;
-        $mon->maBoMon=$maBoMon;
-        $mon->maMon=$maMon;
-        $mon->suaNgay=date('Y-m-d H:i:s');
+      $is_updated=false;
+        if (isset($_POST)) {
+            $filename=$_POST['fileName'];
+            if (!empty($_FILES['file'])) {
+                $dir_uploads = __DIR__ . '/../assets/uploads';
+                @unlink($dir_uploads . '/' . $filename);
+                $filename = $_FILES['file']['name'];
+                @unlink($dir_uploads . '/' . $filename);
+                if (!file_exists($dir_uploads)) {
+                    mkdir($dir_uploads);
+                }
+                $filename = time() . "-" . $_FILES['file']['name'];
+                move_uploaded_file($_FILES['file']['tmp_name'], $dir_uploads . '/' . $filename);
 
-        $is_updated=$mon->update();
-        if ($is_updated)
-        {
-            echo 1;
-        }
-        else
-        {
-            echo 0;
+            }
+            if (isset($_POST['maBoMon']))
+                $maBoMon=$_POST['maBoMon'];
+            if (isset($_POST['tenCongVan']))
+                $tenCongVan=$_POST['tenCongVan'];
+            if (isset($_POST['maGiaoVien']))
+                $maGiaovien=$_POST['maGiaoVien'];
+            if (isset($_POST['noiDung']))
+                $noiDung=$_POST['noiDung'];
+            if (isset($_POST['maCongVan']))
+                $maCongVan=$_POST['maCongVan'];
+            if (isset($_POST['status']))
+                $status=$_POST['status'];
+            $congvan =new Congvan();
+            $congvan->maBoMon=$maBoMon;
+            $congvan->tenCongVan=$tenCongVan;
+            $congvan->maGiaoVien=$maGiaovien;
+            $congvan->noiDung=$noiDung;
+            $congvan->maCongVan=$maCongVan;
+            $congvan->status=$status;
+            $congvan->suaNgay=date('Y-m-d H:i:s');
+            $congvan->file=$filename;
+            $is_updated=$congvan->update();
+            if ($is_updated)
+            {
+                echo 1;
+            }
+            else
+            {
+                echo 0;
+            }
         }
 
     }
