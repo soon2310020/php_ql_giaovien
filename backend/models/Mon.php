@@ -69,17 +69,40 @@ public $soTiet;
     public function update()
     {
         $obj_update = $this->connection
-            ->prepare("UPDATE mon SET maBoMon=:maBoMon,tenMon=:tenMon, moTa=:moTa, sotiet=:sotiet
+            ->prepare("UPDATE mon SET maBoMon=:maBoMon,tenMon=:tenMon, moTa=:moTa, sotiet=:sotiet,suaNgay=:suaNgay
                                 where maMon=:maMon");
         $arr_update = [
             ':maBoMon' => $this->maBoMon,
             ':tenMon' => $this->tenMon,
             ':moTa' => $this->moTa,
             ':sotiet' => $this->soTiet,
-            'maMon'=>$this->maMon
+            'maMon'=>$this->maMon,
+            'suaNgay'=>$this->suaNgay
 
         ];
         return $obj_update->execute($arr_update);
     }
+    public function delete($maMon)
+    {
+        $obj_delete = $this->connection
+            ->prepare("DELETE FROM mon WHERE maMon = $maMon");
+        return $obj_delete->execute();
+    }
+    public function getExel()
+    {
 
+
+        $obj_select = $this->connection
+            ->prepare("SELECT mon.*, bomon.tenBoMon AS tenBoMon FROM mon
+                        INNER JOIN bomon ON mon.maBoMon = bomon.maBoMon 
+                        ORDER BY mon.taoNgay DESC
+                        ");
+
+        $arr_select = [];
+        $obj_select->execute($arr_select);
+        $mon = $obj_select->fetchAll(PDO::FETCH_ASSOC);
+
+        return $mon;
+
+    }
 }

@@ -27,7 +27,6 @@ app.controller('packageController', ['$scope', '$http', '$timeout', '$q', functi
         $http.get("index.php?controller=Mon&action=getAllMon",{params: {numberPerPage:$scope.numberPerPage,pageNumber:$scope.pageNumber,
                 maBoMon:$scope.maBoMon,tenMon:$scope.tenMon}})
             .then(function (response) {
-                console.log(response.data);
                 $scope.listData = response.data;
 
 
@@ -140,9 +139,18 @@ app.controller('packageController', ['$scope', '$http', '$timeout', '$q', functi
         return true;
     }
    $scope.edit=function (item2) {
-       $scope.itemFix=item2;
-       $scope.itemFix.maBoMon=Number(item2.maBoMon);
+        $scope.itemTemp=item2;
+       $scope.itemFix=$scope.itemTemp;
+       $scope.itemFix.maBoMon=Number($scope.itemTemp.maBoMon);
    }
+   $scope.clearFormFix= function()
+    {
+        console.log($scope.itemTemp);
+        $scope.itemFix={maBoMon:'',tenMon:'',sotiet:'',mota:''};
+
+        $scope.search();
+
+    }
    $scope.fix=function () {
        let i = $scope.checkEdit();
        console.log($scope.itemFix);
@@ -159,7 +167,8 @@ app.controller('packageController', ['$scope', '$http', '$timeout', '$q', functi
                    switch (number) {
                        case 1:
 
-                           $("#addPackageForm").modal("hide");
+                           $("#fix").modal("hide");
+                           $scope.clearForm();
                            toastr.success("Sửa môn học thành công");
                            $scope.search();
                            break;
@@ -176,4 +185,38 @@ app.controller('packageController', ['$scope', '$http', '$timeout', '$q', functi
            );
        }
    }
+   $scope.delete=function (itemDelete) {
+       $scope.maMon=Number(itemDelete.maMon);
+   }
+   $scope.deleteYes=function () {
+       $.post(
+           'index.php?controller=Mon&action=delete', // URL
+           {maMon:$scope.maMon},  // Data
+           function (response) {
+
+               number = Number(response);
+               switch (number) {
+                   case 1:
+
+                       $("#deletePackage").modal("hide");
+                       $scope.clearForm();
+                       toastr.success("Xóa thành công môn học");
+                       $scope.search();
+                       break;
+
+                   case 0:
+
+                       toastr.error("Có lỗi trong quá trình xử lý vui lòng thử lại");
+                       $scope.search();
+                       break;
+
+               }
+           },
+           'text'
+       );
+   }
+   $scope.exportExcel=function () {
+       window.open("index.php?controller=Mon&action=excel");
+   }
+
 }]);

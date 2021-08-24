@@ -72,7 +72,7 @@
                             <label style="color: red;">{{listData.rowCount}}</label>
                             <label class="input-sm">Hiển thị: 10 </label>
 
-                            <button type="button"  class="pull-right btn btn-s-sm btn-info" ng-click="exportExcelPackages()"><i class="fa fa-file-excel-o" ></i> Xuất excel</button>
+                            <button type="button"  class="pull-right btn btn-s-sm btn-info" ng-click="exportExcel()"><i class="fa fa-file-excel-o" ></i> Xuất excel</button>
                         </div>
 
                         <div class="table bg-white">
@@ -148,16 +148,13 @@
                     <button type="button" class="close" class="btn btn-default" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title">Xác nhận</h4>
                 </div>
-                <div style="width: 30%; float: left; text-align: center;">
-                    <img src="<%=request.getContextPath()%>/assets/images/q.png" >
-                </div>
                 <div>
                     <div class="modal-body">
-                        <label>Bạn có chắc chắn muốn xóa gói cước </label>
-                        <span>{{namePackNeeded}} hay không?</span>
+                        <label>Bạn có chắc chắn muốn xóa môn học này Không</label>
+
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="deletePackageYes()" style="text-transform: none;"><i class="fa fa-check"></i>Đống ý</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="deleteYes()" style="text-transform: none;"><i class="fa fa-check"></i>Đống ý</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i>Hủy bỏ</button>
                     </div>
                 </div>

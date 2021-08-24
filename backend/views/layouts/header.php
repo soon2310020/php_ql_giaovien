@@ -15,9 +15,9 @@ if (isset($_SESSION['user'])) {
     <!-- Logo -->
     <a href="index2.html" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>A</b>LT</span>
+        <span class="logo-mini"><b>A</b>d</span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>Admin</b>LTE</span>
+        <span class="logo-lg"><b>Admin</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -75,32 +75,17 @@ if (isset($_SESSION['user'])) {
         </div>
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
-            <li class="header">LAOYOUT ADMIN</li>
+            <li class="header">Khoa Công nghệ thông tin</li>
 
             <li>
-                <a href="index.php?controller=category&action=index">
-                    <i class="fa fa-th"></i> <span>Quản lý danh mục</span>
+                <a href="index.php?controller=mon&action=index">
+                    <i class="fa fa-book"></i> <span>Quản lý môn học</span>
                     <span class="pull-right-container">
               <!--<small class="label pull-right bg-green">new</small>-->
             </span>
                 </a>
             </li>
-            <li>
-                <a href="index.php?controller=product&action=index">
-                    <i class="fa fa-code"></i> <span>Quản lý sản phẩm</span>
-                    <span class="pull-right-container">
-              <!--<small class="label pull-right bg-green">new</small>-->
-            </span>
-                </a>
-            </li>
-            <li>
-                <a href="index.php?controller=user&action=index">
-                    <i class="fa fa-user"></i> <span>Quản lý user</span>
-                    <span class="pull-right-container">
-              <!--<small class="label pull-right bg-green">new</small>-->
-            </span>
-                </a>
-            </li>
+
         </ul>
     </section>
     <!-- /.sidebar -->
