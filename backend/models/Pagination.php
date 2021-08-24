@@ -24,6 +24,23 @@ class Pagination
     public $pages;
     public $pageCount;
     public $items2;
+    public $items3;
+
+    /**
+     * @return mixed
+     */
+    public function getItems3()
+    {
+        return $this->items3;
+    }
+
+    /**
+     * @param mixed $items3
+     */
+    public function setItems3($items3)
+    {
+        $this->items3 = $items3;
+    }
 
     /**
      * @return mixed

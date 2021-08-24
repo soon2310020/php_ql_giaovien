@@ -216,6 +216,7 @@ app.controller('packageController', ['$scope', '$http', '$timeout', '$q', functi
        );
    }
    $scope.exportExcel=function () {
+
        window.open("index.php?controller=Mon&action=excel");
    }
 

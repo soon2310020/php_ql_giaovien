@@ -82,6 +82,19 @@ public $soTiet;
         ];
         return $obj_update->execute($arr_update);
     }
+    public function insert()
+    {
+        $obj_insert = $this->connection
+            ->prepare("INSERT INTO mon(maBoMon, tenMon, moTa, sotiet) 
+                                VALUES (:maBoMon,:tenMon, :moTa,:sotiet)");
+        $arr_insert = [
+            ':maBoMon' => $this->maBoMon,
+            ':tenMon' => $this->tenMon,
+            ':moTa' => $this->moTa,
+            ':sotiet' => $this->soTiet,
+        ];
+        return $obj_insert->execute($arr_insert);
+    }
     public function delete($maMon)
     {
         $obj_delete = $this->connection
@@ -105,4 +118,5 @@ public $soTiet;
         return $mon;
 
     }
+
 }

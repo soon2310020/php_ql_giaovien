@@ -85,6 +85,14 @@ if (isset($_SESSION['user'])) {
             </span>
                 </a>
             </li>
+            <li>
+                <a href="index.php?controller=congvan&action=index">
+                    <i class="fa fa-voicemail"></i> <span>Quản lý công văn</span>
+                    <span class="pull-right-container">
+              <!--<small class="label pull-right bg-green">new</small>-->
+            </span>
+                </a>
+            </li>
 
         </ul>
     </section>
