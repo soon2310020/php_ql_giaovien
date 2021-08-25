@@ -14,17 +14,22 @@ class CongvanController extends Controller
     }
     public function getAll()
     {
+        $status=-1;
         $congvan =new Congvan();
         $pageNumber=$_GET['pageNumber'];
         $numberPerPage=$_GET['numberPerPage'];
         $maBoMon=$_GET['maBoMon'];
         $tenCongVan=$_GET['tenCongVan'];
         $maGiaoVien=$_GET['maGiaoVien'];
+        if (isset($_GET['status']))
+        $status=$_GET['status'];
 
-        return $congvan->getALL($pageNumber,$numberPerPage,$maBoMon,$tenCongVan,$maGiaoVien) ;
+        return $congvan->getALL($pageNumber,$numberPerPage,$maBoMon,$tenCongVan,$maGiaoVien,$status) ;
     }
     public function add()
     {
+        $maBoMon=NULL;
+        $maGiaovien=NULL;
         if (isset($_POST) && !empty($_FILES['file'])) {
             $filename= $_FILES['file']['name'];
             $dir_uploads = __DIR__ . '/../assets/uploads';
@@ -65,6 +70,8 @@ class CongvanController extends Controller
     public function update()
     {
       $is_updated=false;
+        $maBoMon=NULL;
+        $maGiaovien=NULL;
         if (isset($_POST)) {
             $filename=$_POST['fileName'];
             if (!empty($_FILES['file'])) {
@@ -114,15 +121,23 @@ class CongvanController extends Controller
     }
     public function delete()
     {
-        $maMon="";
-        if (isset($_POST['maMon']))
+        $maCongVan="";
+        $file="";
+        if (isset($_POST['maCongVan']))
         {
-            $maMon=$_POST['maMon'];
+            $maCongVan=$_POST['maCongVan'];
         }
-        $mon =new Mon();
-        $is_deleted=$mon->delete($maMon);
+
+        if (isset($_POST['file']))
+        {
+            $file=$_POST['file'];
+        }
+        $congvan =new Congvan();
+        $is_deleted=$congvan->delete($maCongVan);
         if ($is_deleted)
         {
+            $dir_uploads = __DIR__ . '/../assets/uploads';
+            @unlink($dir_uploads . '/' . $file);
             echo 1;
         }
         else
@@ -130,48 +145,5 @@ class CongvanController extends Controller
             echo 0;
         }
     }
-    public function excel()
-    {
-        $mon =new Mon();
-        $data = $mon->getExel();
 
-        $excel = new PHPExcel();
-        $excel->setActiveSheetIndex(0);
-        $excel->getActiveSheet()->setTitle('Danh sách Môn Học');
-
-        $excel->getActiveSheet()->getColumnDimension('A')->setWidth(20);
-        $excel->getActiveSheet()->getColumnDimension('B')->setWidth(20);
-        $excel->getActiveSheet()->getColumnDimension('C')->setWidth(30);
-        $excel->getActiveSheet()->getColumnDimension('D')->setWidth(20);
-        $excel->getActiveSheet()->getColumnDimension('E')->setWidth(20);
-        $excel->getActiveSheet()->getColumnDimension('F')->setWidth(30);
-        $excel->getActiveSheet()->getColumnDimension('G')->setWidth(20);
-
-
-        $excel->getActiveSheet()->setCellValue('A1', 'Mã môn học');
-        $excel->getActiveSheet()->setCellValue('B1', 'Tên môn học');
-        $excel->getActiveSheet()->setCellValue('C1', 'Mô tả');
-        $excel->getActiveSheet()->setCellValue('D1', 'Số tiết');
-        $excel->getActiveSheet()->setCellValue('E1', 'Bộ môn');
-        $excel->getActiveSheet()->setCellValue('F1', 'Ngày tạo');
-        $excel->getActiveSheet()->setCellValue('G1', 'Ngày cập nhật');
-        $numRow = 2;
-        foreach ($data as $item) {
-
-
-            $excel->getActiveSheet()->setCellValue('A' . $numRow, $item['maMon']);
-            $excel->getActiveSheet()->setCellValue('B' . $numRow, $item['tenMon']);
-            $excel->getActiveSheet()->setCellValue('C' . $numRow, $item['moTa']);
-            $excel->getActiveSheet()->setCellValue('D' . $numRow, $item['sotiet']);
-            $excel->getActiveSheet()->setCellValue('E' . $numRow, $item['tenBoMon']);
-            $excel->getActiveSheet()->setCellValue('F' . $numRow, $item['taoNgay']);
-            $excel->getActiveSheet()->setCellValue('G' . $numRow, $item['suaNgay']);
-
-            $numRow++;
-        }
-        header('Content-type: application/vnd.ms-excel');
-        header('Content-Disposition: attachment; filename="DanhSachMonHoc_'.date('Y-m-d').'.xls"');
-        PHPExcel_IOFactory::createWriter($excel, 'Excel2007')->save('php://output');
-
-    }
 }

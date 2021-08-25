@@ -14,7 +14,7 @@ public $file;
 public $status;
 
     public $str_search = '';
-    public function getAll($pageNumber,$numberPerPage,$maBoMon,$tenCongVan,$maGiaoVien)
+    public function getAll($pageNumber,$numberPerPage,$maBoMon,$tenCongVan,$maGiaoVien,$status)
     {
         if(!empty($maBoMon))
         {
@@ -23,6 +23,10 @@ public $status;
         if(!empty($maGiaoVien))
         {
             $this->str_search .= " AND giaovien.maGiaoVien =$maGiaoVien";
+        }
+        if($status!=-1)
+        {
+            $this->str_search .= " AND congvan.status =$status";
         }
         if (!empty($tenCongVan))
         {
@@ -86,38 +90,100 @@ public $status;
         $obj_update = $this->connection
             ->prepare("UPDATE congvan SET maBoMon=:maBoMon,tenCongVan=:tenCongVan,file=:file, maGiaoVien=:maGiaoVien,noiDung=:noiDung,status=:status,suaNgay=:suaNgay where maCongVan=:maCongVan");
 
-        $arr_update = [
-            ':maBoMon' => $this->maBoMon,
-            ':tenCongVan' => $this->tenCongVan,
-            ':file' => $this->file,
-            ':maGiaoVien'=>$this->maGiaoVien,
-            ':noiDung' =>$this->noiDung,
-            ':status'=>$this->status,
-            'suaNgay'=>$this->suaNgay,
-            ':maCongVan'=>$this->maCongVan
 
-        ];
+        if (empty($this->maGiaoVien))
+        {
+            $arr_update = [
+                ':maBoMon' => $this->maBoMon,
+                ':tenCongVan' => $this->tenCongVan,
+                ':file' => $this->file,
+                ':maGiaoVien'=>null,
+                ':noiDung' =>$this->noiDung,
+                ':status'=>$this->status,
+                'suaNgay'=>$this->suaNgay,
+                ':maCongVan'=>$this->maCongVan
+
+            ];
+        }
+
+        elseif (empty($this->maBoMon))
+        {
+            $arr_update = [
+                ':maBoMon' => null,
+                ':tenCongVan' => $this->tenCongVan,
+                ':file' => $this->file,
+                ':maGiaoVien'=>$this->maGiaoVien,
+                ':noiDung' =>$this->noiDung,
+                ':status'=>$this->status,
+                'suaNgay'=>$this->suaNgay,
+                ':maCongVan'=>$this->maCongVan
+
+            ];
+        }
+        else
+        {
+            $arr_update = [
+                ':maBoMon' => $this->maBoMon,
+                ':tenCongVan' => $this->tenCongVan,
+                ':file' => $this->file,
+                ':maGiaoVien'=>$this->maGiaoVien,
+                ':noiDung' =>$this->noiDung,
+                ':status'=>$this->status,
+                'suaNgay'=>$this->suaNgay,
+                ':maCongVan'=>$this->maCongVan
+
+            ];
+        }
         return $obj_update->execute($arr_update);
     }
     public function insert()
     {
+
         $obj_insert = $this->connection
             ->prepare("INSERT INTO congvan(maBoMon, tenCongVan, file, maGiaoVien,noiDung,status) 
                                 VALUES (:maBoMon, :tenCongVan, :file, :maGiaoVien,:noiDung,:status)");
-        $arr_insert = [
-            ':maBoMon' => $this->maBoMon,
-            ':tenCongVan' => $this->tenCongVan,
-            ':noiDung' => $this->noiDung,
-            ':file' => $this->file,
-            ':maGiaoVien'=>$this->maGiaoVien,
-            ':status'=>1
-        ];
+        if ($this->maGiaoVien=="")
+        {
+            $arr_insert = [
+                ':maBoMon' => $this->maBoMon,
+                ':tenCongVan' => $this->tenCongVan,
+                ':noiDung' => $this->noiDung,
+                ':file' => $this->file,
+                ':maGiaoVien'=>null,
+                ':status'=>1
+            ];
+        }
+
+        elseif ($this->maBoMon=="")
+        {
+            $arr_insert = [
+                ':maBoMon' => null,
+                ':tenCongVan' => $this->tenCongVan,
+                ':noiDung' => $this->noiDung,
+                ':file' => $this->file,
+                ':maGiaoVien'=>$this->maGiaoVien,
+                ':status'=>1
+            ];
+        }
+        else
+        {
+            $arr_insert = [
+                ':maBoMon' => $this->maBoMon,
+                ':tenCongVan' => $this->tenCongVan,
+                ':noiDung' => $this->noiDung,
+                ':file' => $this->file,
+                ':maGiaoVien'=>$this->maGiaoVien,
+                ':status'=>1
+            ];
+        }
+
         return $obj_insert->execute($arr_insert);
     }
-    public function delete($maMon)
+    public function delete($maCongVan)
     {
+
         $obj_delete = $this->connection
-            ->prepare("DELETE FROM mon WHERE maMon = $maMon");
+            ->prepare("DELETE FROM congvan WHERE maCongVan = $maCongVan");
         return $obj_delete->execute();
     }
 

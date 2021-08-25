@@ -19,7 +19,7 @@
                     <form Class="form-horizontal" role="form" theme="simple">
                         <div class="row" style="margin-top: 10px;">
                             <!--                            <%--   select status--%>-->
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <div class="col-md-4">
                                     <label class="control-label color-label">Bộ Môn:</label>
                                 </div>
@@ -32,7 +32,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <div class="col-md-4">
                                     <label class="control-label color-label">Giáo viên:</label>
                                 </div>
@@ -45,10 +45,22 @@
                                     </select>
                                 </div>
                             </div>
-                            <!--                            <%-- select package type--%>-->
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <div class="col-md-4">
-                                    <label class="control-label color-label">Tên Công văn:</label>
+                                    <label class="control-label color-label">Trạng thái:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <select ng-model="status" id="status" class="form-control">
+                                        <option ng-value="0">đã đọc</option>
+                                        <option ng-value="1">chưa đọc</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <!--                            <%-- select package type--%>-->
+                            <div class="col-sm-3">
+                                <div class="col-md-4">
+                                    <label class="control-label color-label">Tên :</label>
                                 </div>
                                 <div class="col-md-8">
                                     <input type="text" ng-model="tenCongVan" class="form-control">
@@ -255,7 +267,7 @@
                     <div class="col-md-2">Bộ môn(<font color="red">*</font>)</div>
                     <div class="col-md-3">
                         <select ng-model="itemFix.maBoMon" class="form-control" >
-                            <option value=""  disabled style="display:none">--Lựa chọn--</option>
+                            <option value=""  >--Không chọn--</option>
                             <option ng-repeat="item in listData.items2" ng-value="{{item.maBoMon}}">{{item.tenBoMon}}</option>
                         </select>
                     </div>
@@ -275,7 +287,7 @@
                     <div class="col-md-2">Giáo viên(<font color="red">*</font>)</div>
                     <div class="col-md-3">
                         <select ng-model="itemFix.maGiaoVien" class="form-control" >
-                            <option value=""  disabled style="display:none">--Lựa chọn--</option>
+                            <option value=""   >--Không chọn--</option>
                             <option ng-repeat="item in listData.items3" ng-value="{{item.maGiaoVien}}">{{item.tenGiaoVien}}</option>
                         </select>
                     </div>
@@ -299,9 +311,9 @@
                     <div class="col-md-2">Trạng thái(<font color="red">*</font>)</div>
                     <div class="col-md-3">
                         <select ng-model="itemFix.status" class="form-control" >
-                            <option value=""  disabled style="display:none">--Lựa chọn--</option>
-                            <option  ng-value="1">Hiển thị</option>
-                            <option  ng-value="1">Không hiển thị</option>
+                            <option value=""  >--Lựa chọn--</option>
+                            <option  ng-value="1">Chưa đọc</option>
+                            <option  ng-value="0">Đã đọc</option>
                         </select>
                     </div>
 

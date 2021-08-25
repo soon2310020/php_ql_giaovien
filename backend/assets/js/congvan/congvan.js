@@ -13,10 +13,11 @@ app.controller('packageController', ['$scope', '$http', '$timeout', '$q', functi
     $scope.maBoMon="";
     $scope.tenCongVan="";
     $scope.maGiaoVien="";
+    $scope.status=-1;
     $scope.itemAdd={maBoMon:'',tenCongVan:'',maGiaoVien:'',noiDung:''};
 
     $http.get("index.php?controller=Congvan&action=getAll",{params: {numberPerPage:$scope.numberPerPage,pageNumber:$scope.pageNumber,
-            maBoMon:$scope.maBoMon,tenCongVan:$scope.tenCongVan,maGiaoVien:$scope.maGiaoVien}})
+            maBoMon:$scope.maBoMon,tenCongVan:$scope.tenCongVan,maGiaoVien:$scope.maGiaoVien,status:$scope.status}})
         .then(function (response) {
             $scope.listData = response.data;
 
@@ -25,7 +26,7 @@ app.controller('packageController', ['$scope', '$http', '$timeout', '$q', functi
         });
     $scope.search= function () {
         $http.get("index.php?controller=Congvan&action=getAll",{params: {numberPerPage:$scope.numberPerPage,pageNumber:$scope.pageNumber,
-                maBoMon:$scope.maBoMon,tenCongVan:$scope.tenCongVan,maGiaoVien:$scope.maGiaoVien}})
+                maBoMon:$scope.maBoMon,tenCongVan:$scope.tenCongVan,maGiaoVien:$scope.maGiaoVien,status:$scope.status}})
             .then(function (response) {
                 $scope.listData = response.data;
 
@@ -37,6 +38,7 @@ app.controller('packageController', ['$scope', '$http', '$timeout', '$q', functi
         $scope.maBoMon="";
         $scope.tenCongVan="";
         $scope.maGiaoVien="";
+        $scope.status=-1;
         $scope.search();
     }
     $scope.loadPageData=function (item) {
@@ -237,12 +239,13 @@ app.controller('packageController', ['$scope', '$http', '$timeout', '$q', functi
         }
     }
     $scope.delete=function (itemDelete) {
-        $scope.maMon=Number(itemDelete.maMon);
+        $scope.maCongVan=Number(itemDelete.maCongVan);
+        $scope.fileDeleted=itemDelete.file;
     }
     $scope.deleteYes=function () {
         $.post(
-            'index.php?controller=Mon&action=delete', // URL
-            {maMon:$scope.maMon},  // Data
+            'index.php?controller=Congvan&action=delete', // URL
+            {maCongVan:$scope.maCongVan,file:$scope.fileDeleted},  // Data
             function (response) {
 
                 number = Number(response);
@@ -251,7 +254,7 @@ app.controller('packageController', ['$scope', '$http', '$timeout', '$q', functi
 
                         $("#deletePackage").modal("hide");
                         $scope.clearForm();
-                        toastr.success("Xóa thành công môn học");
+                        toastr.success("Xóa thành công công văn");
                         $scope.search();
                         break;
 
@@ -265,9 +268,6 @@ app.controller('packageController', ['$scope', '$http', '$timeout', '$q', functi
             },
             'text'
         );
-    }
-    $scope.exportExcel=function () {
-        window.open("index.php?controller=Mon&action=excel");
     }
 
 }]);
