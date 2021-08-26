@@ -100,4 +100,9 @@ class LoginController
         $this->content = $this->render('views/users/register.php');
         require_once 'views/layouts/main_login.php';
     }
+    public function logout()
+{
+    unset($_SESSION['user']);
+    header("Location: index.php?controller=home");
+}
 }

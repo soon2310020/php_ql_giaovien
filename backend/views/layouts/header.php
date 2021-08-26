@@ -5,9 +5,6 @@ $jobs = '';
 $avatar = '';
 if (isset($_SESSION['user'])) {
     $username = $_SESSION['user']['username'];
-    $jobs = $_SESSION['user']['jobs'];
-    $avatar = $_SESSION['user']['avatar'];
-    $year = date('Y', strtotime($_SESSION['user']['created_at']));
 }
 
 ?>

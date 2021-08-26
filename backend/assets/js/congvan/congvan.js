@@ -74,6 +74,7 @@ app.controller('packageController', ['$scope', '$http', '$timeout', '$q', functi
 
                             $("#addPackageForm").modal("hide");
                             toastr.success("Thêm mới công văn thành công");
+                            $scope.clearForm();
                             $scope.search();
                             break;
 

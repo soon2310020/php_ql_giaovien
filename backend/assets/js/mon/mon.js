@@ -60,6 +60,7 @@ app.controller('packageController', ['$scope', '$http', '$timeout', '$q', functi
 
                          $("#addPackageForm").modal("hide");
                          toastr.success("Thêm mới môn học thành công");
+                         $scope.clearForm();
                          $scope.search();
                          break;
 

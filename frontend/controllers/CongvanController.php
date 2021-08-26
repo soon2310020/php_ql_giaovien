@@ -8,7 +8,7 @@ class CongvanController extends Controller
 {
     public  function  index()
     {
-        if($_SESSION['user']['vaiTro']==1)
+        if($_SESSION['user']['vaiTro']==2)
         {
             $this->content = $this->render('views/congvan/indexForGiaoVien.php');
         }
@@ -32,6 +32,19 @@ class CongvanController extends Controller
         $status=$_GET['status'];
 
         return $congvan->getALL($pageNumber,$numberPerPage,$maBoMon,$tenCongVan,"",$status) ;
+    }
+    public function getAllForGiaoVien()
+    {
+        $status=-1;
+        $congvan =new Congvan();
+        $pageNumber=$_GET['pageNumber'];
+        $numberPerPage=$_GET['numberPerPage'];
+        $maGiaoVien=$_SESSION['user']['maGiaoVien'];
+        $tenCongVan=$_GET['tenCongVan'];
+        if (isset($_GET['status']))
+            $status=$_GET['status'];
+
+        return $congvan->getALL($pageNumber,$numberPerPage,"",$tenCongVan,$maGiaoVien,$status) ;
     }
     public function add()
     {

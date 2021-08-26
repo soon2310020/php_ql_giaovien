@@ -13,8 +13,10 @@ if (isset($_SESSION['user'])) {
              break;
          case 2:
              $vaiTro="USER";
+             break;
          case 3:
              $vaiTro="TRƯỞNG BỘ MÔN";
+             break;
      }
 }
 
@@ -55,7 +57,7 @@ if (isset($_SESSION['user'])) {
                                 <a href="#" class="btn btn-default btn-flat"><?php  ?></a>
                             </div>
                             <div class="pull-right">
-                                <a href="index.php?controller=user&action=logout" class="btn btn-default btn-flat">Sign
+                                <a href="index.php?controller=login&action=logout" class="btn btn-default btn-flat">Sign
                                     out</a>
                             </div>
                         </li>
