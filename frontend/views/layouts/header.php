@@ -5,9 +5,17 @@ $jobs = '';
 $avatar = '';
 if (isset($_SESSION['user'])) {
     $username = $_SESSION['user']['username'];
-    $jobs = $_SESSION['user']['jobs'];
-    $avatar = $_SESSION['user']['avatar'];
-    $year = date('Y', strtotime($_SESSION['user']['created_at']));
+     $number=$_SESSION['user']['vaiTro'];
+     switch ($number)
+     {
+         case 1:
+             $vaiTro="ADMIN";
+             break;
+         case 2:
+             $vaiTro="USER";
+         case 3:
+             $vaiTro="TRƯỞNG BỘ MÔN";
+     }
 }
 
 ?>
@@ -31,22 +39,20 @@ if (isset($_SESSION['user'])) {
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="assets/uploads/<?php echo $avatar; ?>" class="user-image" alt="User Image">
                         <span class="hidden-xs"><?php echo $username; ?></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="assets/uploads/<?php echo $avatar; ?>" class="img-circle" alt="User Image">
 
                             <p>
-
+                               <?php echo $vaiTro ?>
                             </p>
                         </li>
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                <a href="#" class="btn btn-default btn-flat"><?php  ?></a>
                             </div>
                             <div class="pull-right">
                                 <a href="index.php?controller=user&action=logout" class="btn btn-default btn-flat">Sign
@@ -66,7 +72,7 @@ if (isset($_SESSION['user'])) {
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="assets/uploads/<?php echo $avatar; ?>" class="img-circle" alt="User Image">
+
             </div>
             <div class="pull-left info">
                 <p><?php echo $username; ?></p>

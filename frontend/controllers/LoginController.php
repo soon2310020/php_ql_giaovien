@@ -1,5 +1,5 @@
 <?php
-require_once 'models/User.php';
+require_once 'models/Giaovien.php';
 
 class LoginController
 {
@@ -38,20 +38,18 @@ class LoginController
 
             $username = $_POST['username'];
             $password = md5($_POST['password']);
-            //validate
             if (empty($username) || empty($password)) {
                 $this->error = 'Username hoặc password không được để trống';
             }
-            $user_model = new User();
+            $user_model = new Giaovien();
             if (empty($this->error)) {
                 $user = $user_model->getUserByUsernameAndPassword($username, $password);
                 if (empty($user)) {
                     $this->error = 'Sai username hoặc password';
                 } else {
                     $_SESSION['success'] = 'Đăng nhập thành công';
-                    //tạo session user để xác định user nào đang login
                     $_SESSION['user'] = $user;
-                    header("Location: index.php?controller=product");
+                    header("Location: index.php?controller=home");
                     exit();
                 }
             }

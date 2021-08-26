@@ -88,52 +88,29 @@ public $status;
     public function update()
     {
         $obj_update = $this->connection
-            ->prepare("UPDATE congvan SET maBoMon=:maBoMon,tenCongVan=:tenCongVan,file=:file, maGiaoVien=:maGiaoVien,noiDung=:noiDung,status=:status,suaNgay=:suaNgay where maCongVan=:maCongVan");
+            ->prepare("UPDATE congvan SET status=:status,suaNgay=:suaNgay where maCongVan=:maCongVan");
 
 
-        if (empty($this->maGiaoVien))
-        {
-            $arr_update = [
-                ':maBoMon' => $this->maBoMon,
-                ':tenCongVan' => $this->tenCongVan,
-                ':file' => $this->file,
-                ':maGiaoVien'=>null,
-                ':noiDung' =>$this->noiDung,
-                ':status'=>$this->status,
-                'suaNgay'=>$this->suaNgay,
-                ':maCongVan'=>$this->maCongVan
+          if ($this->status==0)
+          {
+              $arr_update = [
+                  'suaNgay'=>$this->suaNgay,
+                  ':maCongVan'=>$this->maCongVan,
+                  ':status'=>1
+              ];
+          }
+          else
+          {
+              $arr_update = [
+                  'suaNgay'=>$this->suaNgay,
+                  ':maCongVan'=>$this->maCongVan,
+                  ':status'=>0
+              ];
+          }
 
-            ];
-        }
 
-        elseif (empty($this->maBoMon))
-        {
-            $arr_update = [
-                ':maBoMon' => null,
-                ':tenCongVan' => $this->tenCongVan,
-                ':file' => $this->file,
-                ':maGiaoVien'=>$this->maGiaoVien,
-                ':noiDung' =>$this->noiDung,
-                ':status'=>$this->status,
-                'suaNgay'=>$this->suaNgay,
-                ':maCongVan'=>$this->maCongVan
 
-            ];
-        }
-        else
-        {
-            $arr_update = [
-                ':maBoMon' => $this->maBoMon,
-                ':tenCongVan' => $this->tenCongVan,
-                ':file' => $this->file,
-                ':maGiaoVien'=>$this->maGiaoVien,
-                ':noiDung' =>$this->noiDung,
-                ':status'=>$this->status,
-                'suaNgay'=>$this->suaNgay,
-                ':maCongVan'=>$this->maCongVan
 
-            ];
-        }
         return $obj_update->execute($arr_update);
     }
     public function insert()
