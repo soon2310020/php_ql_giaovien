@@ -78,7 +78,7 @@ public $suaNgay;
     public function update()
     {
         $obj_update = $this->connection
-            ->prepare("UPDATE giangday SET thoiGian=:thoiGian,diaDiem=:diaDiem,soTiet=:soTiet,ghiChu=:ghiChu where maMon=:maMon and maGiaoVien=:maGiaoVien");
+            ->prepare("UPDATE giangday SET thoiGian=:thoiGian,diaDiem=:diaDiem,soTiet=:soTiet,ghiChu=:ghiChu,suaNgay=:suaNgay where maMon=:maMon and maGiaoVien=:maGiaoVien");
 
 
         $arr_update = [
@@ -87,7 +87,8 @@ public $suaNgay;
             ':thoiGian' => $this->thoiGian,
             ':diaDiem' => $this->diaDiem,
             ':soTiet'=>$this->soTiet,
-            ':ghiChu'=>$this->ghiChu
+            ':ghiChu'=>$this->ghiChu,
+            ':suaNgay'=>$this->suaNgay
         ];
         return $obj_update->execute($arr_update);
     }

@@ -94,6 +94,14 @@ if (isset($_SESSION['user'])) {
             </span>
                 </a>
             </li>
+            <li>
+                <a href="index.php?controller=lichgiangday&action=index">
+                    <i class="fa fa-calendar"></i> <span>Lịch giảng dạy</span>
+                    <span class="pull-right-container">
+              <!--<small class="label pull-right bg-green">new</small>-->
+            </span>
+                </a>
+            </li>
 
         </ul>
     </section>

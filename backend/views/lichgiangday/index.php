@@ -104,7 +104,7 @@
                                             <button class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-cogs"></i></button>
                                             <ul class="dropdown-menu pull-left" style="width: fit-content;">
                                                 <li ><a href="javascript:void(0)" data-toggle="modal" ng-click="edit(item);" data-target="#fix"><font style="font-weight: bold;">
-                                                            <i class="fa fa-eye icon"></i> Chi tiết công văn
+                                                            <i class="fa fa-eye icon"></i> Chi tiết Lịch giảng dạy
                                                         </font></a></li>
 
                                                 <li ><a href="javascript:void(0)" data-toggle="modal" data-target="#deletePackage" ng-click="delete(item);"><font style="font-weight: bold;">

@@ -43,6 +43,7 @@ class LichgiangdayController extends Controller
         $lichGiangDay->ghiChu=$ghiChu;
         $lichGiangDay->thoiGian=$thoiGian;
         $lichGiangDay->diaDiem=$diaDiem;
+
         $is_created=$lichGiangDay->insert();
         if ($is_created)
         {
@@ -76,6 +77,7 @@ class LichgiangdayController extends Controller
         $lichGiangDay->ghiChu=$ghiChu;
         $lichGiangDay->thoiGian=$thoiGian;
         $lichGiangDay->diaDiem=$diaDiem;
+        $lichGiangDay->suaNgay=date('Y-m-d H:i:s');
         $is_updated=$lichGiangDay->update();
         if ($is_updated)
         {
