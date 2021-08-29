@@ -1,7 +1,6 @@
 <?php
 require_once 'controllers/Controller.php';
 require_once 'models/User.php';
-require_once 'models/Pagination.php';
 class UserController extends Controller {
     public function index() {
         $user_model = new User();

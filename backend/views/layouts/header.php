@@ -1,10 +1,11 @@
 <?php
 $year = '';
 $username = '';
-$jobs = '';
-$avatar = '';
 if (isset($_SESSION['user'])) {
-    $username = $_SESSION['user']['username'];
+
+    $username = $_SESSION['user']['tenUser'];
+
+    $year = date('Y', strtotime($_SESSION['user']['taoNgay']));
 }
 
 ?>
@@ -12,9 +13,9 @@ if (isset($_SESSION['user'])) {
     <!-- Logo -->
     <a href="index2.html" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>A</b>d</span>
+        <span class="logo-mini"><b>A</b>LT</span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>Admin</b></span>
+        <span class="logo-lg"><b>Admin</b>LTE</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -28,13 +29,13 @@ if (isset($_SESSION['user'])) {
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="assets/uploads/<?php echo $avatar; ?>" class="user-image" alt="User Image">
+                        <img src="assets/images/user2-160x160.jpg" class="user-image" alt="User Image">
                         <span class="hidden-xs"><?php echo $username; ?></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="assets/uploads/<?php echo $avatar; ?>" class="img-circle" alt="User Image">
+                            <img src="assets/images/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                             <p>
 
@@ -72,25 +73,31 @@ if (isset($_SESSION['user'])) {
         </div>
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
-            <li class="header">Khoa Công nghệ thông tin</li>
+            <li class="header">LAOYOUT ADMIN</li>
 
             <li>
-                <a href="index.php?controller=mon&action=index">
-                    <i class="fa fa-book"></i> <span>Quản lý môn học</span>
+                <a href="index.php?controller=bomon&action=index">
+                    <i class="fa fa-th"></i> <span>Quản lý bộ môn</span>
                     <span class="pull-right-container">
               <!--<small class="label pull-right bg-green">new</small>-->
             </span>
                 </a>
             </li>
             <li>
-                <a href="index.php?controller=congvan&action=index">
-                    <i class="fa fa-voicemail"></i> <span>Quản lý công văn</span>
+                <a href="index.php?controller=giaovien&action=index">
+                    <i class="fa fa-code"></i> <span>Quản lý giáo viên</span>
                     <span class="pull-right-container">
               <!--<small class="label pull-right bg-green">new</small>-->
             </span>
                 </a>
             </li>
-
+            <!-- <li>
+                <a href="index.php?controller=user&action=index">
+                    <i class="fa fa-user"></i> <span>Quản lý user</span>
+                    <span class="pull-right-container">
+            </span>
+                </a>
+            </li> -->
         </ul>
     </section>
     <!-- /.sidebar -->
