@@ -12,8 +12,6 @@
     <link rel="stylesheet" href="assets/css/all.min.css">
     <link rel="stylesheet" href="assets/css/AdminLTE.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/toastr.min.css">
-
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="assets/css/_all-skins.min.css">
@@ -58,7 +56,5 @@
 <script src="assets/ckeditor/ckeditor.js"></script>
 <!--My SCRIPT-->
 <script src="assets/js/script.js"></script>
-<script src="assets/js/common.js"></script>
-<script src="assets/js/toastr.min.js"></script>
 </body>
 </html>
