@@ -20,7 +20,7 @@ class Giaovien extends Model
 	  {
         $now = date("Y-m-d H:i:s");
         if (empty($maBoMon))
-        $sql = "INSERT INTO giaovien VALUES($maGiaoVien, '$tenGiaoVien', null , '$now', '$vaiTro','','$username')";
+        $sql = "INSERT INTO giaovien VALUES($maGiaoVien, '$tenGiaoVien', null, '$now', '$vaiTro','','$username')";
         else
             $sql = "INSERT INTO giaovien VALUES($maGiaoVien, '$tenGiaoVien', $maBoMon, '$now', '$vaiTro','','$username')";
         //return $sql;

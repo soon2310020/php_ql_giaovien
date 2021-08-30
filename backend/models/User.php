@@ -1,21 +1,13 @@
 <?php
 require_once 'models/Model.php';
 class User extends Model {
-    public $id;
+    public $maGiaoVien;
+    public $tenGiaoVien;
+    public $maBoMon;
+    public $vaiTro;
+    public $taoNgay;
     public $username;
     public $password;
-    public $first_name;
-    public $last_name;
-    public $phone;
-    public $address;
-    public $email;
-    public $avatar;
-    public $jobs;
-    public $last_login;
-    public $facebook;
-    public $status;
-    public $created_at;
-    public $updated_at;
 
     public $str_search;
 
@@ -122,7 +114,7 @@ VALUES(:username, :password, :first_name, :last_name, :phone, :address, :email, 
 
     public function getUserByUsernameAndPassword($username, $password) {
         $obj_select = $this->connection
-            ->prepare("SELECT * FROM users WHERE username=:username AND password=:password LIMIT 1");
+            ->prepare("SELECT * FROM giaovien WHERE username=:username AND PASSWORD=:password LIMIT 1");
         $arr_select = [
             ':username' => $username,
             ':password' => $password,

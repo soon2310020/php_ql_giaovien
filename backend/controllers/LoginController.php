@@ -31,16 +31,13 @@ class LoginController
     public function login() {
         //nếu user đã đăngn hập r thì ko cho truy cập lại trang login, mà chuenr hướng tới backend
         if (isset($_SESSION['user'])) {
-            header('Location: index.php?controller=category&action=index');
+            header('Location: index.php?controller=home&action=index');
             exit();
         }
         if (isset($_POST['submit'])) {
-//            die;
+
             $username = $_POST['username'];
-            //do password đang lưu trong CSDL sử dụng cơ chế mã hóa md5 nên cần phải thêm
-//            hàm md5 cho password
             $password = md5($_POST['password']);
-            //validate
             if (empty($username) || empty($password)) {
                 $this->error = 'Username hoặc password không được để trống';
             }
@@ -51,7 +48,6 @@ class LoginController
                     $this->error = 'Sai username hoặc password';
                 } else {
                     $_SESSION['success'] = 'Đăng nhập thành công';
-                    //tạo session user để xác định user nào đang login
                     $_SESSION['user'] = $user;
                     header("Location: index.php?controller=home");
                     exit();
