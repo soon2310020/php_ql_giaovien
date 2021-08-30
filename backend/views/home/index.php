@@ -1,2 +1,2 @@
 <?php
-echo "<h1>Đây là trang admin</h1>";
+echo "<h1>Welcome back admin</h1>";

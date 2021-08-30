@@ -51,6 +51,7 @@
                                 </div>
                                 <div class="col-md-8">
                                     <select ng-model="status" id="status" class="form-control">
+                                        <option value="-1" >Tất cả</option>
                                         <option ng-value="0">đã đọc</option>
                                         <option ng-value="1">chưa đọc</option>
 

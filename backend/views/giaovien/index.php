@@ -5,8 +5,11 @@
       $form = $_POST["addForm"];
 
       $giaovien = new Giaovien();
+      if (!isset($form["maBoMon"])||empty($form['maBoMon']))
 
-      $status = $giaovien->ThemGiaoVien($form["maGiaoVien"],$form["tenGiaoVien"],$form["maBoMon"],$form["vaiTro"],$form["username"]);
+          $status = $giaovien->ThemGiaoVien($form["maGiaoVien"],$form["tenGiaoVien"],"",$form["vaiTro"],$form["username"]);
+      else
+          $status = $giaovien->ThemGiaoVien($form["maGiaoVien"],$form["tenGiaoVien"],$form['maBoMon'],$form["vaiTro"],$form["username"]);
       //echo $status;
       if(!$status){
         echo '<script>alert("Có lỗi xảy ra khi thực hiện truy vấn");</script>';
@@ -212,7 +215,7 @@
                         <div class="col-md-2">Bộ môn(<font color="red">*</font>)</div>
                         <div class="col-md-3">
                             <select name="addForm[maBoMon]" class="form-control" >
-                                <!-- <option value="">--Lựa chọn--</option> -->
+                                 <option value="">--Lựa chọn--</option>
                                 <?php 
                                     foreach($bomons as $val){
                                         echo '<option value="'.$val['maBoMon'].'">'.$val['tenBoMon'].'</option>';

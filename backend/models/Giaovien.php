@@ -19,7 +19,10 @@ class Giaovien extends Model
     public function ThemGiaoVien($maGiaoVien, $tenGiaoVien, $maBoMon, $vaiTro,$username)
 	  {
         $now = date("Y-m-d H:i:s");
-        $sql = "INSERT INTO giaovien VALUES($maGiaoVien, '$tenGiaoVien', $maBoMon, '$now', '$vaiTro','','$username')";
+        if (empty($maBoMon))
+        $sql = "INSERT INTO giaovien VALUES($maGiaoVien, '$tenGiaoVien', null , '$now', '$vaiTro','','$username')";
+        else
+            $sql = "INSERT INTO giaovien VALUES($maGiaoVien, '$tenGiaoVien', $maBoMon, '$now', '$vaiTro','','$username')";
         //return $sql;
         return $this->cn->ExecuteQuery($sql);
 	  }
