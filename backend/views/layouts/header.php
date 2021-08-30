@@ -28,23 +28,13 @@ if (isset($_SESSION['user'])) {
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="assets/uploads/<?php echo $avatar; ?>" class="user-image" alt="User Image">
+                        
                         <span class="hidden-xs"><?php echo $username; ?></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
-                        <li class="user-header">
-                            <img src="assets/uploads/<?php echo $avatar; ?>" class="img-circle" alt="User Image">
-
-                            <p>
-
-                            </p>
-                        </li>
                         <!-- Menu Footer-->
                         <li class="user-footer">
-                            <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
-                            </div>
                             <div class="pull-right">
                                 <a href="index.php?controller=user&action=logout" class="btn btn-default btn-flat">Sign
                                     out</a>
@@ -62,42 +52,51 @@ if (isset($_SESSION['user'])) {
     <section class="sidebar">
         <!-- Sidebar user panel -->
         <div class="user-panel">
-            <div class="pull-left image">
-                <img src="assets/uploads/<?php echo $avatar; ?>" class="img-circle" alt="User Image">
-            </div>
-            <div class="pull-left info">
-                <p><?php echo $username; ?></p>
-                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-            </div>
         </div>
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
-            <li class="header">Khoa Công nghệ thông tin</li>
-
+            <li class="header"><h5>Khoa Công nghệ thông tin</h5></li>
+            <li>
+                <a href="index.php?controller=giaovien&action=index">
+                    <i class="fa fa-user"></i> <span>Quản lý Giáo Viên</span>
+                    <span class="pull-right-container">
+                        <!--<small class="label pull-right bg-green">new</small>-->
+                    </span>
+                </a>
+            </li>
             <li>
                 <a href="index.php?controller=mon&action=index">
                     <i class="fa fa-book"></i> <span>Quản lý môn học</span>
                     <span class="pull-right-container">
-              <!--<small class="label pull-right bg-green">new</small>-->
-            </span>
+                        <!--<small class="label pull-right bg-green">new</small>-->
+                    </span>
                 </a>
             </li>
             <li>
                 <a href="index.php?controller=congvan&action=index">
                     <i class="fa fa-voicemail"></i> <span>Quản lý công văn</span>
                     <span class="pull-right-container">
-              <!--<small class="label pull-right bg-green">new</small>-->
-            </span>
+                        <!--<small class="label pull-right bg-green">new</small>-->
+                    </span>
                 </a>
             </li>
             <li>
                 <a href="index.php?controller=lichgiangday&action=index">
                     <i class="fa fa-calendar"></i> <span>Quản lý lịch giảng dạy</span>
                     <span class="pull-right-container">
-              <!--<small class="label pull-right bg-green">new</small>-->
-            </span>
+                        <!--<small class="label pull-right bg-green">new</small>-->
+                    </span>
                 </a>
             </li>
+            <li>
+                <a href="index.php?controller=bomon&action=index">
+                    <i class="fa fa-book-open"></i> <span>Quản lý Bộ Môn</span>
+                    <span class="pull-right-container">
+                        <!--<small class="label pull-right bg-green">new</small>-->
+                    </span>
+                </a>
+            </li>
+
 
         </ul>
     </section>
@@ -110,7 +109,7 @@ if (isset($_SESSION['user'])) {
 <div class="message-wrap content-wrap content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <?php if (isset($_SESSION['error'])): ?>
+        <?php if (isset($_SESSION['error'])) : ?>
             <div class="alert alert-danger">
                 <?php
                 echo $_SESSION['error'];
@@ -119,7 +118,7 @@ if (isset($_SESSION['user'])) {
             </div>
         <?php endif; ?>
 
-        <?php if (!empty($this->error)): ?>
+        <?php if (!empty($this->error)) : ?>
             <div class="alert alert-danger">
                 <?php
                 echo $this->error;
@@ -127,7 +126,7 @@ if (isset($_SESSION['user'])) {
             </div>
         <?php endif; ?>
 
-        <?php if (isset($_SESSION['success'])): ?>
+        <?php if (isset($_SESSION['success'])) : ?>
             <div class="alert alert-success">
                 <?php
                 echo $_SESSION['success'];

@@ -23,5 +23,15 @@ $(document).ready(function () {
     //đường dẫn đến file connector.php của ckfinder
     filebrowserUploadUrl: 'assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files'
   });
+  
+
+
+  $(".deleteButton").on('click',function(){
+    
+    var ma = $(this).attr('val-target');
+    $('.in-val-target').val(ma);
+
+  })
+  
 
 });
