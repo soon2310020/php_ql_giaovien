@@ -156,7 +156,7 @@
                 </div>
                 <div>
                     <div class="modal-body text-center">
-                        <label>Bạn có chắc chắn muốn xóa môn học này Không</label>
+                        <label>Bạn có chắc chắn muốn xóa lịch giảng dạy này Không</label>
 
                     </div>
                     <div class="modal-footer center-block">
