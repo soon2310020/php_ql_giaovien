@@ -1,9 +1,8 @@
 pipeline {
     agent any
     stages {
-        stage('clone') {
+        stage('Clone') {
             steps {
-                echo 'clone..'
                 git branch: 'main', url: 'https://github.com/soon2310020/php_ql_giaovien.git'
             }
         }
