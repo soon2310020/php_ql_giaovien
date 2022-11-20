@@ -8,8 +8,6 @@ pipeline {
         }
         stage('ABC'){
 
-                def dockerHome = tool 'myDocker'
-                env.PATH = "${dockerHome}/bin:${env.PATH}"
             steps{
                 sh 'docker build -t sont457/docker-php.'
                 sh 'docker push sont457/docker-php'
