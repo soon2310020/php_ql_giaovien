@@ -8,9 +8,8 @@ pipeline {
         }
         stage('build_docker'){
             steps{
-            withDockerRegistry(credentialsId: 'docker_login2', url: 'https://index.docker.io/v2/') {
-                // some block
-            }
+                sh 'docker build -t sont457/docker-php .'
+                sh 'docker push sont457/docker-php'
             }
         }
     }
