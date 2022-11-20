@@ -6,11 +6,10 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/soon2310020/php_ql_giaovien.git'
             }
         }
-        stage('Initialize'){
+        stage('ABC'){
+
                 def dockerHome = tool 'myDocker'
                 env.PATH = "${dockerHome}/bin:${env.PATH}"
-            }
-        stage('ABC'){
             steps{
                 sh 'docker build -t sont457/docker-php.'
                 sh 'docker push sont457/docker-php'
